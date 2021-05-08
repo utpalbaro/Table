@@ -28,22 +28,29 @@ class Database {
      * @param {function} searchCriteria 
      * @param {JSON} data 
      */
-    get(searchCriteria, data) {
+    get(data, searchCriteria) {
         let results = [];
         data.forEach(element => {
             if (searchCriteria(element, data)) {
                 results.push(element);
             }
         });
-        return results;
+        return JSON.stringify(results);
     }
 
-    delete(searchCriteria, data) {
+    /**
+     * 
+     * @param {function} searchCriteria 
+     * @param {JSON} data 
+     */
+    delete(data, searchCriteria) {
         // Creates a new array
-        let newArray = this._data.filter((element, index, array) => {
-            return searchCriteria(element, data); 
+        let newArray = this._data.filter(element => {
+            return !searchCriteria(element, data); 
         });
+        
+        this._data = newArray;
     }
 }
 
-module.exports = WorkLog;
+module.exports = Database;
