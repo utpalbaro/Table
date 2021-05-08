@@ -25,12 +25,14 @@ class Database {
 
     /**
      * 
-     * @param {function} searchCriteria 
-     * @param {JSON} data 
+     * @param {JSON} search Search query in the form of JSON
+     * @param {function} searchCriteria Search function
      */
-    get(data, searchCriteria) {
+    get(search, searchCriteria) {
+        let data = JSON.parse(search);
+
         let results = [];
-        data.forEach(element => {
+        this._data.forEach(element => {
             if (searchCriteria(element, data)) {
                 results.push(element);
             }
@@ -40,10 +42,11 @@ class Database {
 
     /**
      * 
-     * @param {function} searchCriteria 
-     * @param {JSON} data 
+     * @param {JSON} search Search query in the form of JSON
+     * @param {function} searchCriteria Search function
      */
-    delete(data, searchCriteria) {
+    delete(search, searchCriteria) {
+        let data = JSON.parse(search);
         // Creates a new array
         let newArray = this._data.filter(element => {
             return !searchCriteria(element, data); 
