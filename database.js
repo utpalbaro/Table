@@ -35,6 +35,10 @@ class DatabaseManager {
     delete(data) {
         this._database.delete(data);
     }
+
+    update(data, replacement) {
+        this._database.update(data, replacement);
+    }
 }
 
 module.exports = DatabaseManager;

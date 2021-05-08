@@ -16,5 +16,6 @@ console.log(w.fetchAll());
 console.log(w.fetch('{"role": "Support"}'));
 
 w.delete('{"role": "Defender"}');
+w.update('{"role": "Support"}', '{"role": "Defender"}');
 
 console.log(w.fetchAll());

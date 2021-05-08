@@ -50,6 +50,21 @@ class ArrayDataBase {
         
         this._data = newArray;
     }
+
+    update(search, replacement) {
+        const data = JSON.parse(search);
+        const replace = JSON.parse(replacement);
+
+        const self = this;
+
+        this._data.forEach(element => {
+            if (self.searchCriteria(element, data)) {
+                for (const property in replace) {
+                    element[property] = replace[property];
+                }
+            }
+        });
+    }
 }
 
 module.exports = ArrayDataBase;
