@@ -1,22 +1,20 @@
 const WorkLog = require('./database');
+const ArrayData = require('./arraydatabase');
 
-const w = new WorkLog();
-w.add('{"name": "Dahlia",   "role": "Support"}');
-w.add('{"name": "Chaac",    "role": "Duelist"}');
-w.add('{"name": "Anvil",    "role": "Defender"}');
-w.add('{"name": "Dallas",   "role": "Intel"}');
-w.add('{"name": "Saint",    "role": "Support"}');
-w.add('{"name": "Sigrid",   "role": "Breacher"}');
-w.add('{"name": "Trench",   "role": "Support"}');
+const w = new WorkLog(new ArrayData);
 
-console.log(w.getAll());
+w.insert('{"name": "Dahlia",   "role": "Support"}');
+w.insert('{"name": "Chaac",    "role": "Duelist"}');
+w.insert('{"name": "Anvil",    "role": "Defender"}');
+w.insert('{"name": "Dallas",   "role": "Intel"}');
+w.insert('{"name": "Saint",    "role": "Support"}');
+w.insert('{"name": "Sigrid",   "role": "Breacher"}');
+w.insert('{"name": "Trench",   "role": "Defender"}');
 
-console.log(w.get('{"role": "Support"}', search));
+console.log(w.fetchAll());
 
-w.delete('{"role": "Defender"}', search);
+console.log(w.fetch('{"role": "Support"}'));
 
-console.log(w.getAll());
+w.delete('{"role": "Defender"}');
 
-function search(element, data) {
-    return element.role === data.role;
-}
+console.log(w.fetchAll());
