@@ -1,7 +1,7 @@
 const WorkLog = require('./database');
-const ArrayData = require('./arraydatabase');
+const ArrayDB = require('./arraydb');
 
-const w = new WorkLog(new ArrayData);
+const w = new WorkLog(new ArrayDB);
 
 w.insert('{"name": "Dahlia",   "role": "Support"}');
 w.insert('{"name": "Chaac",    "role": "Duelist"}');

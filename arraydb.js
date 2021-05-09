@@ -1,6 +1,6 @@
 // A simple array based database
 
-class ArrayDataBase {
+class ArrayDB {
     constructor() {
         this._data = []
     }
@@ -67,4 +67,4 @@ class ArrayDataBase {
     }
 }
 
-module.exports = ArrayDataBase;
+module.exports = ArrayDB;
