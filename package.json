@@ -2,11 +2,15 @@
   "name": "worklog",
   "version": "1.0.0",
   "description": "",
-  "main": "database.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "test.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^12.0.7"
+  }
 }
