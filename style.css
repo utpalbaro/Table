@@ -14,3 +14,10 @@ input[type=text], input[type=number] {
     font-size: inherit;
     padding: 1px 6px;
 }
+
+.entry-div {
+    /* margin: auto; */
+    position: absolute;
+    bottom: 10px;
+    width: 98%;
+}
