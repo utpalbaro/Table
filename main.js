@@ -17,7 +17,6 @@ const menuTemplate = [
                     } else {
                         // create the save dialog box
                         filepath = dialog.showSaveDialogSync(focusedWindow);
-                        console.log(filepath);
                     }
                     webContents.send('req:save');
                 }
@@ -25,9 +24,14 @@ const menuTemplate = [
             {
                 label: 'Open',
                 click(item, focusedWindow) {
-                    let dir = dialog.showOpenDialog(focusedWindow, {
-                        properties: ['openDirectory']
+                    let filepaths = dialog.showOpenDialogSync(focusedWindow, {
+                        properties: ['openFile']
                     });
+                    filepath = filepaths[0];
+                    let data = fs.readFileSync(filepath, {
+                        encoding: 'utf-8'
+                    });
+                    webContents.send('req:read', data);
                 }
             }
         ]
@@ -87,8 +91,6 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on('res:save', (event, data) => {
-    console.log(filepath);
-    console.log(data);
     if (filepath) {
         fs.writeFileSync(filepath, JSON.stringify(data, null, 4));
     }

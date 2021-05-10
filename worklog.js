@@ -40,3 +40,7 @@ ipcRenderer.on('req:save', (event) => {
     const data = table.getData();
     ipcRenderer.send('res:save', data);
 });
+
+ipcRenderer.on('req:read', (event, data) => {
+    table.setData(data);
+})
