@@ -1,3 +1,5 @@
+const {ipcRenderer} = require('electron');
+
 const Tabulator = require('tabulator-tables');
 
 const table = new Tabulator("#tasks-div", {
@@ -30,4 +32,11 @@ textInput.addEventListener('keypress', (e) => {
         // clear the text input
         textInput.value = "";
     }
+});
+
+
+ipcRenderer.on('req:save', (event) => {
+    // table.download('json', filename);
+    const data = table.getData();
+    ipcRenderer.send('res:save', data);
 });

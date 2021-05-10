@@ -1,5 +1,9 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
+
+let webContents;
+let filepath = null;
 
 const menuTemplate = [
     {
@@ -8,7 +12,14 @@ const menuTemplate = [
             {
                 label: 'Save',
                 click(item, focusedWindow) {
-                    saveItems(focusedWindow);
+                    if (filepath) {
+                        // simply save to path
+                    } else {
+                        // create the save dialog box
+                        filepath = dialog.showSaveDialogSync(focusedWindow);
+                        console.log(filepath);
+                    }
+                    webContents.send('req:save');
                 }
             },
             {
@@ -52,6 +63,8 @@ function createWindow () {
         }
     });
 
+    webContents = win.webContents;
+
     win.loadFile('index.html');
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
@@ -73,3 +86,10 @@ app.on('window-all-closed', () => {
     }
 })
 
+ipcMain.on('res:save', (event, data) => {
+    console.log(filepath);
+    console.log(data);
+    if (filepath) {
+        fs.writeFileSync(filepath, JSON.stringify(data, null, 4));
+    }
+})
