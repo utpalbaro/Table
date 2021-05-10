@@ -8,6 +8,10 @@ input[type=text], input[type=number] {
     box-sizing: border-box;
 }
 
+/* div {
+    width: 100%;
+}
+
 .textarea {
     border: 1px solid #ccc;
     font-family: inherit;
@@ -15,8 +19,13 @@ input[type=text], input[type=number] {
     padding: 1px 6px;
 }
 
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+} */
+
 .entry-div {
-    /* margin: auto; */
     position: absolute;
     bottom: 10px;
     width: 98%;

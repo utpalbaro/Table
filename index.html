@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Worklog</title>
     <link rel="stylesheet" href="style.css">
+    <link href="node_modules/tabulator-tables/dist/css/tabulator_simple.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="main-div" id="main-div"></div>
-    <div class="entry-div">
-        <input type="text" name="task-entry" id="task-entry">
+    <div class="main-div" id="main-div">
+        <div class="tasks-div" id="tasks-div">
+        </div>
+
+        <div class="entry-div">
+            <input type="text" name="task-entry" id="task-entry">
+        </div>
     </div>
     <script src="worklog.js"></script>
 </body>

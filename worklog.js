@@ -1,27 +1,33 @@
-/**
- * Specific to this project
- */
+const Tabulator = require('tabulator-tables');
 
-class WorkLog {
-    addLogEntry() {
-        const divMain = document.getElementById("main");
+const table = new Tabulator("#tasks-div", {
+    // height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+    layout:"fitColumns", //fit columns to width of table (optional)
+    // responsiveLayout: true,
+    autoResize: true,
+    columns:[ //Define Table Columns
+        {title:"Task", field:"task", editor:"input"},
+        {title:"Status", field:"status", editor:"input"},
+        {title:"Start", field:"start", sorter:"date", hozAlign:"center"},
+        {title:"End", field:"end", sorter:"date", hozAlign:"center"},
+    ]
+});
 
-        const divTask = document.createElement('div');
-        divTask.className = 'task'
-
-        divMain.appendChild(divTask);
-
-        const time = new Date();
-        const divTime = document.createElement('div');
-        divTime.className = 'time'
+const textInput = document.getElementById('task-entry');
+textInput.addEventListener('keypress', (e) => {
+    if (e.key == 'Enter') {
+        const currentDate = new Date();
         
-        const divText = document.createElement('div');
-        divText.className = 'desc'
+        const data = {
+            task: textInput.value,
+            status: 'Incomplete',
+            start: currentDate.toLocaleString(),
+            end: ''
+        };
 
-        const desc = document.createElement('textarea');
-        divText.appendChild(desc);
+        table.addRow(data, false);
 
-        divTask.appendChild(divTime);
-        divTask.appendChild(divText);
+        // clear the text input
+        textInput.value = "";
     }
-}
+});
