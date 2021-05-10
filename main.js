@@ -5,31 +5,41 @@ const fs = require('fs');
 let webContents;
 let filepath = null;
 
+function saveFile(focusedWindow) {
+    if (!filepath) {
+        // create the save dialog box
+        filepath = dialog.showSaveDialogSync(focusedWindow);
+    }
+    webContents.send('req:save');
+}
+
+function openFile(focusedWindow) {
+    let filepaths = dialog.showOpenDialogSync(focusedWindow, {
+        properties: ['openFile']
+    });
+    filepath = filepaths[0];
+    let data = fs.readFileSync(filepath, {
+        encoding: 'utf-8'
+    });
+    webContents.send('req:read', data);
+}
+
 const menuTemplate = [
     {
         label: 'File',
         submenu: [
             {
                 label: 'Save',
+                accelerator: 'Ctrl+S',
                 click(item, focusedWindow) {
-                    if (!filepath) {
-                        // create the save dialog box
-                        filepath = dialog.showSaveDialogSync(focusedWindow);
-                    }
-                    webContents.send('req:save');
+                    saveFile(focusedWindow);
                 }
             },
             {
                 label: 'Open',
+                accelerator: 'Ctrl+O',
                 click(item, focusedWindow) {
-                    let filepaths = dialog.showOpenDialogSync(focusedWindow, {
-                        properties: ['openFile']
-                    });
-                    filepath = filepaths[0];
-                    let data = fs.readFileSync(filepath, {
-                        encoding: 'utf-8'
-                    });
-                    webContents.send('req:read', data);
+                    openFile(focusedWindow);
                 }
             }
         ]
