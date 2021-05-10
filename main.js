@@ -12,9 +12,7 @@ const menuTemplate = [
             {
                 label: 'Save',
                 click(item, focusedWindow) {
-                    if (filepath) {
-                        // simply save to path
-                    } else {
+                    if (!filepath) {
                         // create the save dialog box
                         filepath = dialog.showSaveDialogSync(focusedWindow);
                     }
