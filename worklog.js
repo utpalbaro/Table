@@ -7,7 +7,9 @@ const table = new Tabulator("#tasks-div", {
     layout:"fitColumns", //fit columns to width of table (optional)
     // responsiveLayout: true,
     autoResize: true,
+    movableRows: true,
     columns:[ //Define Table Columns
+        {rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30},
         {title:"Task", field:"task", editor:"input"},
         {title:"Status", field:"status", editor:"input"},
         {title:"Start", field:"start", sorter:"date", hozAlign:"center"},
