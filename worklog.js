@@ -10,10 +10,10 @@ const table = new Tabulator("#tasks-div", {
     movableRows: true,
     columns:[ //Define Table Columns
         {rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:30, minWidth:30},
-        {title:"Task", field:"task", editor:"input"},
-        {title:"Status", field:"status", editor:"input"},
-        {title:"Start", field:"start", sorter:"date", hozAlign:"center"},
-        {title:"End", field:"end", sorter:"date", hozAlign:"center"},
+        {title:"Task", field:"task", editor:"input", formatter:"textarea"},
+        {title:"Status", field:"status", editor:"input", width: 180},
+        {title:"Start", field:"start", sorter:"date", hozAlign:"center", width: 180},
+        {title:"End", field:"end", sorter:"date", hozAlign:"center", width: 180},
     ]
 });
 
